@@ -27,7 +27,8 @@
 
       $.ajax({
         url: 'https://holidayapi.com/v1/holidays?'+'country='+country+'&year='+year+'&month='+month+'&key='+keyHoliday,
-
+        type: 'GET',
+        crossDomain: true
       }).done(function(data){
         //console.log(typeof startDate);
         //console.log(startDate);
