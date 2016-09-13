@@ -18,8 +18,10 @@
       country = $('#countrycode').val();
       var stringDate = $('#startdate').val();
       var startDate = new Date(stringDate);
-      var endDate = startDate.setDate(startdate.getDate + $('#numofdays').val() );
+      var endDate = new Date(stringDate);
+      endDate.setDate( endDate.getDate() + Number( $('#numofdays').val() ) );
 
+      console.log( endDate );
       month = startDate.getMonth() + 1;
       year = startDate.getFullYear();
 
@@ -27,10 +29,15 @@
         url: 'https://holidayapi.com/v1/holidays?'+'country='+country+'&year='+year+'&month='+month+'&key='+keyHoliday,
 
       }).done(function(data){
-        console.log(typeof startDate);
-        console.log(startDate);
-        $( "#startresponse" ).datepicker( "setDate", startDate ).datepicker();
-        $( "#endresponse" ).datepicker( "setDate", endDate ).datepicker();
+        //console.log(typeof startDate);
+        //console.log(startDate);
+        $( "#startresponse" ).datepicker().datepicker( "setDate", stringDate );
+        var holidays = data.holidays;
+
+        holidays.map(function(date){
+          //console.log(date['date']);
+        });
+        $( "#endresponse" ).datepicker().datepicker( "setDate", endDate );
       });
     });
   });
